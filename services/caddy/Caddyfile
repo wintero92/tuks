@@ -1,0 +1,19 @@
+rss.zaqqaz.cz {
+	reverse_proxy {
+		to freshrss:80
+	}
+}
+
+media.zaqqaz.cz {
+	reverse_proxy {
+		to jellyfin:8096
+	}
+}
+
+transmission.zaqqaz.cz {
+	reverse_proxy transmission:9091
+}
+
+leila.zaqqaz.cz {
+	reverse_proxy leila_wordpress:80
+}

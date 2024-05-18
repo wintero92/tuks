@@ -1,0 +1,38 @@
+services:
+  wordpress_db:
+    container_name: leila_wordpress_db
+    restart: unless-stopped
+    image: mariadb:10.6.4-focal
+    command: '--default-authentication-plugin=mysql_native_password'
+    volumes:
+      - ${LEILA_WORDPRESS_VOLUME_DB}:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${LEILA_WORDPRESS_MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${LEILA_WORDPRESS_MYSQL_DATABASE}
+      - MYSQL_USER=${LEILA_WORDPRESS_MYSQL_USER}
+      - MYSQL_PASSWORD=${LEILA_WORDPRESS_MYSQL_PASSWORD}
+    networks:
+      - wordpress
+
+  wordpress:
+    container_name: leila_wordpress
+    image: wordpress:latest
+    volumes:
+      - ${LEILA_WORDPRESS_VOLUME_DATA}:/var/www/html
+    restart: always
+    environment:
+      - WORDPRESS_DB_HOST=leila_wordpress_db
+      - WORDPRESS_DB_USER=${LEILA_WORDPRESS_MYSQL_USER}
+      - WORDPRESS_DB_PASSWORD=${LEILA_WORDPRESS_MYSQL_PASSWORD}
+      - WORDPRESS_DB_NAME=${LEILA_WORDPRESS_MYSQL_DATABASE}
+    networks:
+      - proxy
+      - wordpress
+    depends_on:
+      - wordpress_db
+
+networks:
+  proxy:
+    external: true
+  wordpress:
+    external: true

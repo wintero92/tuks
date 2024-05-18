@@ -1,0 +1,18 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:10.9.1
+    container_name: jellyfin
+    restart: unless-stopped
+    volumes:
+        - ${JELLYFIN_VOLUME_CONFIG}:/config
+        - ${JELLYFIN_VOLUME_CACHE}:/cache
+        - ${JELLYFIN_VOLUME_MEDIA}:/media
+    # ports:
+      # - 7359:7359/udp
+      # - 1900:1900/udp
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

@@ -1,0 +1,16 @@
+services:
+  freshrss:
+    image: freshrss/freshrss:1
+    container_name: freshrss
+    restart: unless-stopped
+    volumes:
+      - ${FRESHRSS_VOLUME}/data:/var/www/FreshRSS/data
+    environment:
+      - CRON_MIN=${FRESHRSS_CRON_MIN}
+      - TZ=${FRESHRSS_TZ}
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

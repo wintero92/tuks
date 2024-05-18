@@ -1,0 +1,19 @@
+FRESHRSS_DOMAIN {
+	reverse_proxy {
+		to freshrss:80
+	}
+}
+
+JELLYFIN_DOMAIN {
+	reverse_proxy {
+		to jellyfin:8096
+	}
+}
+
+TRANSMISSION_DOMAIN {
+	reverse_proxy transmission:9091
+}
+
+LEILA_WORDPRESS_DOMAIN {
+	reverse_proxy leila_wordpress:80
+}
