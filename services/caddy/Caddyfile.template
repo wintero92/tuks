@@ -18,6 +18,6 @@ LEILA_WORDPRESS_DOMAIN {
 	reverse_proxy leila_wordpress:80
 }
 
-FIRELY_DOMAIN {
+FIREFLY_DOMAIN {
 	reverse_proxy firefly:8080
 }

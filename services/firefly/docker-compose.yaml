@@ -5,7 +5,7 @@ services:
     restart: always
     volumes:
       - ${FIRELY_VOLUME_UPLOAD}:/var/www/html/storage/upload
-    env_file: env
+    env_file: .firefly.env
     networks:
       - firefly
       - proxy
@@ -27,6 +27,17 @@ services:
       - firefly
     volumes:
       - ${FIRELY_VOLUME_DB}:/var/lib/mysql
+  importer:
+    image: fireflyiii/data-importer:version-1
+    container_name: firefly_importer
+    restart: always
+    networks:
+      - firefly
+    # ports:
+      # - "81:8080"
+    depends_on:
+      - firefly
+    env_file: .importer.env
 
 networks:
   firefly:
