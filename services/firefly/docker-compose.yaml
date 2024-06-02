@@ -27,12 +27,14 @@ services:
       - firefly
     volumes:
       - ${FIRELY_VOLUME_DB}:/var/lib/mysql
-  importer:
+  
+  firefly_importer:
     image: fireflyiii/data-importer:version-1
     container_name: firefly_importer
     restart: always
     networks:
       - firefly
+      - proxy
     # ports:
       # - "81:8080"
     depends_on:

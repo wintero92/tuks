@@ -110,6 +110,9 @@ export LEILA_WORDPRESS_VOLUME_DB=${ROOT_DATA}/leila_wordpress/database
 export FIREFLY_DOMAIN=fire.${DOMAIN}
 sed -i "s/FIREFLY_DOMAIN/${FIREFLY_DOMAIN}/" services/caddy/Caddyfile
 
+export FIREFLY_IMPORTER_DOMAIN=fire-imp.${DOMAIN}
+sed -i "s/FIREFLY_IMPORTER_DOMAIN/${FIREFLY_IMPORTER_DOMAIN}/" services/caddy/Caddyfile
+
 export FIRELY_MYSQL_ROOT_PASSWORD=538gfdhe12343f.14
 export FIRELY_MYSQL_DATABASE=firefly
 export FIRELY_MYSQL_USER=firefly
