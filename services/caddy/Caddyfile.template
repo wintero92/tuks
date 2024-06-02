@@ -17,3 +17,7 @@ TRANSMISSION_DOMAIN {
 LEILA_WORDPRESS_DOMAIN {
 	reverse_proxy leila_wordpress:80
 }
+
+FIRELY_DOMAIN {
+	reverse_proxy firefly:8080
+}

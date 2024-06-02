@@ -105,6 +105,25 @@ export LEILA_WORDPRESS_VOLUME_DB=${ROOT_DATA}/leila_wordpress/database
 #######################################################################################################################
 
 #######################################################################################################################
+# START: firefly
+
+export FIRELY_DOMAIN=fire.${DOMAIN}
+sed -i "s/FIRELY_DOMAIN/${FIRELY_DOMAIN}/" services/caddy/Caddyfile
+
+export FIRELY_MYSQL_ROOT_PASSWORD=538gfdhe12343f.14
+export FIRELY_MYSQL_DATABASE=firefly
+export FIRELY_MYSQL_USER=firefly
+export FIRELY_MYSQL_PASSWORD=1244tg2.31234sd
+
+export FIREFLY_APP_KEY=So3eRae6om5tri7gOf33Chgrs1xa5bly
+
+export FIRELY_VOLUME_UPLOAD=${ROOT_DATA}/firefly/upload
+export FIRELY_VOLUME_DB=${ROOT_DATA}/firefly/database
+
+# STOP: firefly
+#######################################################################################################################
+
+#######################################################################################################################
 # START: docker compose up -d
 
 docker compose -f services/caddy/docker-compose.yaml up -d --force-recreate
@@ -112,6 +131,7 @@ docker compose -f services/jellyfin/docker-compose.yaml up -d --force-recreate
 docker compose -f services/freshrss/docker-compose.yaml up -d --force-recreate
 docker compose -f services/transmission/docker-compose.yaml up -d --force-recreate
 docker compose -f services/leila_wordpress/docker-compose.yaml up -d --force-recreate
+docker compose -f services/firefly/docker-compose.yaml up -d --force-recreate
 
 # STOP: docker compose up -d
 #######################################################################################################################

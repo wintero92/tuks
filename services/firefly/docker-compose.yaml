@@ -1,0 +1,35 @@
+services:
+  firefly:
+    image: fireflyiii/core:version-6
+    container_name: firefly
+    restart: always
+    volumes:
+      - ${FIRELY_VOLUME_UPLOAD}:/var/www/html/storage/upload
+    env_file: env
+    networks:
+      - firefly
+      - proxy
+    # ports:
+    # - 80:8080
+    depends_on:
+      - firefly_db
+
+  firefly_db:
+    image: mariadb:lts
+    container_name: firefly_db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${FIRELY_MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${FIRELY_MYSQL_USER}
+      - MYSQL_PASSWORD=${FIRELY_MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${FIRELY_MYSQL_DATABASE}
+    networks:
+      - firefly
+    volumes:
+      - ${FIRELY_VOLUME_DB}:/var/lib/mysql
+
+networks:
+  firefly:
+    external: true
+  proxy:
+    external: true
